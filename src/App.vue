@@ -15,19 +15,15 @@ export default {
   data() {
     return {
       titulo: "Galeria de Ibagens",
-      fotos: [
-        {
-          url:
-            "https://www.petz.com.br/blog/wp-content/uploads/2019/04/como-saber-se-o-cachorro-esta-com-febre-doencas.jpg",
-          titulo: "Cachorro"
-        },
-        {
-          url:
-            "https://www.petz.com.br/blog/wp-content/uploads/2019/04/como-saber-se-o-cachorro-esta-com-febre-doencas.jpg",
-          titulo: "Cachorrinho"
-        }
-      ]
+      fotos: []
     };
+  },
+
+  created() {
+    this.$http
+      .get("http://localhost:3000/v1/fotos")
+      .then(response => response.json())
+      .then(fotos => (this.fotos = fotos), err => console.log(err));
   }
 };
 </script>
